@@ -1,0 +1,12 @@
+
+output->: input Where to generate the licenese file? --if "output is not defined"
+
+license_type:
+  _>: select
+  choices:
+    - Apache 2.0: apache
+    - MIT: mit
+
+authors->: input Who are the license holders --if "authors is not defined and license_type in ['mit']"
+
+gen_>: generate {{path_join(['templates',join([license_type,'.txt'])])}} {{path_join([output,'LICENSE'])}}
