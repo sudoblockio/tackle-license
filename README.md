@@ -1,6 +1,6 @@
 # tackle-license
 
-Tackle provider to generate a license file in a directory. 
+A [tackle-box](https://github.com/robcxyz/tackle-box) provider to generate a license file in a directory. 
 
 ## Usage 
 

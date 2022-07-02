@@ -1,11 +1,21 @@
+import pytest
 from tackle import tackle
 import os
-import yaml
+import shutil
 
+LICENSE = [
+    'apache',
+    'mit',
+    'gpl-v3',
+    'bsd',
+    'closed-source',
+]
 
-def test_min(change_base_dir, fixture_dir):
-    fixture = os.path.join(fixture_dir, "min.yaml")
-    with open(fixture) as f:
-        fixture_dict = yaml.safe_load(f)
-    create = tackle(**fixture_dict, no_input=True)
+@pytest.mark.parametrize("license", LICENSE)
+def test_all(change_base_dir, license):
+    create = tackle(**{
+        "output": "test-output",
+        "license_type": license,
+    }, no_input=True)
     assert os.path.exists(os.path.join(create["output"], 'LICENSE'))
+    shutil.rmtree("test-output")
