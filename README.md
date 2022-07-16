@@ -7,7 +7,10 @@ A [tackle-box](https://github.com/robcxyz/tackle-box) provider to generate a lic
 Within a **`tackle.yaml`**:
 ```yaml
 project_slug->: input 
-license_>: tackle robcxyz/tackle-license --output {{project_slug}}
+license:
+  _>: tackle robcxyz/tackle-license 
+  extra_context:
+    output: {{project_slug}}
 ```
 
 From command line:
