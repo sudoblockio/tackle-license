@@ -1,7 +1,7 @@
 
 output->: input Where to generate the license file? --if "output is not defined"
 
-type:
+license_type:
   ->: select
   choices:
     - Apache 2.0: apache
@@ -9,22 +9,22 @@ type:
     - GPL Version 3: gpl-v3
     - BSD Version 3: bsd
     - Closed source: closed-source
-  if: type is not defined
+  if: license_type is not defined
 
 author:
   ->: input Who are the license holders
-  if: author is not defined and type in ['mit','bsd']
+  if: author is not defined and license_type in ['mit','bsd','apache']
 
 start_date:
   ->: input What year to start the license from --default 2021
-  if: date is not defined and type in ['bsd']
+  if: date is not defined and license_type in ['bsd']
 
 end_date:
-  ->: input What year to end the license (is perpetual basically so don't fret) --default {{date_now("%Y")}}
-  if: date is not defined and type in ['bsd']
+  ->: input What year to end the license (is perpetual basically so don't fret) --default {{date_now("%Y")|string}}
+  if: date is not defined and license_type in ['bsd','apache']
 
 date:
   ->: date_now "%B %Y"
-  if: date is not defined and type in ['closed-source']
+  if: date is not defined and license_type in ['closed-source']
 
-gen_>: generate {{path_join(['templates',join([type,'.txt'])])}} {{path_join([output,'LICENSE'])}}
+gen_>: generate {{path_join(['templates',join([license_type,'.txt'])])}} {{path_join([output,'LICENSE'])}}
