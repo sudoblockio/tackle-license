@@ -6,14 +6,13 @@
     type: str
     description: The output directory to put a `LICENSE` file
     default->: input Which directory to generate the license file?
-
   license_file_name:
     type: str
-    default: LICENSE
     description: The name of the license file
-
+    default: LICENSE
   license_type:
     type: str
+    description: The type of license, one of apache, mit, gpl-v3, bsd, closed-source
     default:
       ->: select
       choices:
@@ -22,15 +21,17 @@
         - GPL Version 3: gpl-v3
         - BSD Version 3: bsd
         - Closed source: closed-source
-
   author:
     type: str
+    description: The author / authors used for MIT, BSD, and Apache licenses
     default: ""
   start_date:
     type: str
+    description: The start year, used for BSD license
     default: ""
   end_date:
     type: str
+    description: The end date, can be current date, for BSD and Apache
     default: ""
 
   exec:
@@ -51,3 +52,6 @@
       if: license_type in ['closed-source']
 
     gen_>: generate {{path_join(['templates',join([license_type,'.txt'])])}} {{path_join([output,'LICENSE'])}}
+
+    # TODO: Export a header that can be put in comments of code
+    header: TODO
