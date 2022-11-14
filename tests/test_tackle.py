@@ -13,9 +13,12 @@ LICENSE = [
 
 @pytest.mark.parametrize("license", LICENSE)
 def test_all(change_base_dir, license):
-    create = tackle(**{
-        "output": "test-output",
+    tackle(**{
+        "output": "output",
         "license_type": license,
+        "author": 'Foo',
+        "start_date": 2022,
+        "end_date": 2022,
     }, no_input=True)
-    assert os.path.exists(os.path.join(create["output"], 'LICENSE'))
-    shutil.rmtree("test-output")
+    assert os.path.exists(os.path.join('output', 'LICENSE'))
+    shutil.rmtree("output")

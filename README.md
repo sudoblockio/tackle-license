@@ -9,8 +9,7 @@ Within a **`tackle.yaml`**:
 project_slug->: input 
 license:
   _>: tackle robcxyz/tackle-license 
-  extra_context:
-    output: {{project_slug}}
+  output: {{project_slug}}
 ```
 
 From command line:

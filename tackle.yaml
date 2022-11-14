@@ -1,30 +1,53 @@
 
-output->: input Where to generate the license file? --if "output is not defined"
+<-:
+  help: Create a license file
 
-license_type:
-  ->: select
-  choices:
-    - Apache 2.0: apache
-    - MIT: mit
-    - GPL Version 3: gpl-v3
-    - BSD Version 3: bsd
-    - Closed source: closed-source
-  if: license_type is not defined
+  output:
+    type: str
+    description: The output directory to put a `LICENSE` file
+    default->: input Which directory to generate the license file?
 
-author:
-  ->: input Who are the license holders
-  if: author is not defined and license_type in ['mit','bsd','apache']
+  license_file_name:
+    type: str
+    default: LICENSE
+    description: The name of the license file
 
-start_date:
-  ->: input What year to start the license from --default 2021
-  if: date is not defined and license_type in ['bsd']
+  license_type:
+    type: str
+    default:
+      ->: select
+      choices:
+        - Apache 2.0: apache
+        - MIT: mit
+        - GPL Version 3: gpl-v3
+        - BSD Version 3: bsd
+        - Closed source: closed-source
 
-end_date:
-  ->: input What year to end the license (is perpetual basically so don't fret) --default {{date_now("%Y")|string}}
-  if: date is not defined and license_type in ['bsd','apache']
+  author:
+    type: str
+    default: ""
+  start_date:
+    type: str
+    default: ""
+  end_date:
+    type: str
+    default: ""
 
-date:
-  ->: date_now "%B %Y"
-  if: date is not defined and license_type in ['closed-source']
+  exec:
+    author:
+      ->: input Who are the license holders
+      if: author == '' and license_type in ['mit','bsd','apache']
 
-gen_>: generate {{path_join(['templates',join([license_type,'.txt'])])}} {{path_join([output,'LICENSE'])}}
+    start_date:
+      ->: input What year to start the license from --default 2021
+      if: start_date == '' and license_type == 'bsd'
+
+    end_date:
+      ->: input What year to end the license (is perpetual basically so don't fret) --default {{date_now("%Y")|string}}
+      if: end_date == '' and license_type in ['bsd','apache']
+
+    date:
+      ->: date_now "%B %Y"
+      if: license_type in ['closed-source']
+
+    gen_>: generate {{path_join(['templates',join([license_type,'.txt'])])}} {{path_join([output,'LICENSE'])}}
