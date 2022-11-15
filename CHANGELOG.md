@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/robcxyz/tackle-license/compare/v0.2.0...v0.2.1) (2022-11-15)
+
+
+### Bug Fixes
+
+* fields in closed-source license ([46a45af](https://github.com/robcxyz/tackle-license/commit/46a45af0dddb88c75c0d815d36af43923e5c1bc8))
+
 ## [0.2.0](https://github.com/robcxyz/tackle-license/compare/v0.1.1...v0.2.0) (2022-11-14)
 
 
