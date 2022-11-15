@@ -19,6 +19,8 @@ def test_all(change_base_dir, license):
         "author": 'Foo',
         "start_date": 2022,
         "end_date": 2022,
+        "author_email": "foo@bar.com",
+        "owner": "foo inc."
     }, no_input=True)
     assert os.path.exists(os.path.join('output', 'LICENSE'))
     shutil.rmtree("output")

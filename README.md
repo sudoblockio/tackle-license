@@ -26,6 +26,15 @@ From command line:
 tackle robcxyz/tackle-license
 ```
 
+Prompts: 
+
+```text
+? Which directory to generate the license file? output-dir
+? license_type >>> Apache 2.0
+? Who are the license holders? Bart Simpson 
+? What year to end the license? (current year is fine) 2022
+```
+
 ### License
 
 [Apache 2.0](LICENSE)

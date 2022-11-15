@@ -23,7 +23,15 @@
         - Closed source: closed-source
   author:
     type: str
-    description: The author / authors used for MIT, BSD, and Apache licenses
+    description: The author / authors used for MIT, BSD, Apache, and Closed Source licenses
+    default: ""
+  author_email:
+    type: str
+    description: The author email used for the Closed Source license
+    default: ""
+  owner:
+    type: str
+    description: The owner used for the Closed Source license
     default: ""
   start_date:
     type: str
@@ -34,17 +42,25 @@
     description: The end date, can be current date, for BSD and Apache
     default: ""
 
-  exec:
+  exec<-:
     author:
-      ->: input Who are the license holders
+      ->: input Who are the license holders?
       if: author == '' and license_type in ['mit','bsd','apache']
 
+    author_email:
+      ->: input An email for the license holder?
+      if: author_email == '' and license_type in ['closed-source']
+
+    owner:
+      ->: input Who are the license holders?
+      if: owner == '' and license_type in ['closed-source']
+
     start_date:
-      ->: input What year to start the license from --default 2021
+      ->: input What year to start the license from? --default 2021
       if: start_date == '' and license_type == 'bsd'
 
     end_date:
-      ->: input What year to end the license (is perpetual basically so don't fret) --default {{date_now("%Y")|string}}
+      ->: input What year to end the license? (current year is fine) --default {{date_now("%Y")|string}}
       if: end_date == '' and license_type in ['bsd','apache']
 
     date:

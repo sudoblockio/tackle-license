@@ -1,5 +1,5 @@
-/* Copyright (C) YoYoDyne Systems, Inc - All Rights Reserved
+/* Copyright (C) {{owner}} - All Rights Reserved
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
- * Written by Elmer Fudd <efudd@yoyodyne.com>, {{date}}
+ * Written by {{author}} <{{author_email}}>, {{date}}
  */
